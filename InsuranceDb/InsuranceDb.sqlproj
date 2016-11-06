@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>InsuranceDb</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{62752728-68d8-4a44-b81d-93ccb8b48353}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>InsuranceDb</RootNamespace>
+    <AssemblyName>InsuranceDb</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\TownInCounty.sql" />
+    <Build Include="dbo\Tables\Town.sql" />
+    <Build Include="dbo\Tables\TargetSystem.sql" />
+    <Build Include="dbo\Tables\Salutation.sql" />
+    <Build Include="dbo\Tables\RatingFactorOnPolicy.sql" />
+    <Build Include="dbo\Tables\RatingFactor.sql" />
+    <Build Include="dbo\Tables\RatingBaseRate.sql" />
+    <Build Include="dbo\Tables\QuestionType.sql" />
+    <Build Include="dbo\Tables\QuestionRangeGroup.sql" />
+    <Build Include="dbo\Tables\QuestionRange.sql" />
+    <Build Include="dbo\Tables\QuestionMultipleChoiceGroup.sql" />
+    <Build Include="dbo\Tables\QuestionMultiChoice.sql" />
+    <Build Include="dbo\Tables\QuestionAmended.sql" />
+    <Build Include="dbo\Tables\Question.sql" />
+    <Build Include="dbo\Tables\Provider.sql" />
+    <Build Include="dbo\Tables\PolicyType.sql" />
+    <Build Include="dbo\Tables\PolicyQuestion.sql" />
+    <Build Include="dbo\Tables\PolicyDefinition.sql" />
+    <Build Include="dbo\Tables\PolicyAnswer.sql" />
+    <Build Include="dbo\Tables\PolicyAmentmentType.sql" />
+    <Build Include="dbo\Tables\PolicyAmendment.sql" />
+    <Build Include="dbo\Tables\PolicyAddOnPurchased.sql" />
+    <Build Include="dbo\Tables\PolicyAddOnAvailable.sql" />
+    <Build Include="dbo\Tables\Policy.sql" />
+    <Build Include="dbo\Tables\PhoneNumberType.sql" />
+    <Build Include="dbo\Tables\PhoneNumber.sql" />
+    <Build Include="dbo\Tables\PersonPhone.sql" />
+    <Build Include="dbo\Tables\PersonPassword.sql" />
+    <Build Include="dbo\Tables\PersonLogin.sql" />
+    <Build Include="dbo\Tables\PersonEmailAddress.sql" />
+    <Build Include="dbo\Tables\PersonAddress.sql" />
+    <Build Include="dbo\Tables\Person.sql" />
+    <Build Include="dbo\Tables\Password.sql" />
+    <Build Include="dbo\Tables\Login.sql" />
+    <Build Include="dbo\Tables\GlobalRegionSet.sql" />
+    <Build Include="dbo\Tables\GlobalRegion.sql" />
+    <Build Include="dbo\Tables\EmailAddressType.sql" />
+    <Build Include="dbo\Tables\EmailAddress.sql" />
+    <Build Include="dbo\Tables\CustomerCommunication.sql" />
+    <Build Include="dbo\Tables\County.sql" />
+    <Build Include="dbo\Tables\CountryInRegion.sql" />
+    <Build Include="dbo\Tables\Country.sql" />
+    <Build Include="dbo\Tables\CommunicationType.sql" />
+    <Build Include="dbo\Tables\AnswerRangeGroup.sql" />
+    <Build Include="dbo\Tables\Answer.sql" />
+    <Build Include="dbo\Tables\AddressType.sql" />
+    <Build Include="dbo\Tables\AddressOnPolicy.sql" />
+    <Build Include="dbo\Tables\Address.sql" />
+    <Build Include="dbo\Tables\AddOn.sql" />
+    <Build Include="dbo\Tables\AdditionalPersonOnPolicy.sql" />
+  </ItemGroup>
+</Project>

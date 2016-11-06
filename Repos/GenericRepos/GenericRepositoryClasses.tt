@@ -1,0 +1,72 @@
+﻿<#@ template  language="C#" debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Configuration" #>
+<#@ include file="TemplateFilemanagerV2.1.ttinclude" #>
+
+<# var manager = TemplateFileManager.Create(this); 
+
+	SqlConnection con = new SqlConnection(@"data source=DESKTOP-SKD9D95\SQLEXPRESS;initial catalog=Osip;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework"); //ConfigurationManager.ConnectionStrings["Osip"].ConnectionString);  
+
+	string SQL = @"
+SELECT name FROM sys.tables
+WHERE name NOT IN (
+SELECT DISTINCT (T1.TABLE_NAME)
+FROM	(SELECT COUNT(*) cols,TABLE_NAME
+			FROM INFORMATION_SCHEMA.COLUMNS
+			GROUP BY TABLE_NAME) T1,
+		(SELECT COUNT(*) keys, tab.TABLE_NAME
+			FROM	INFORMATION_SCHEMA.TABLE_CONSTRAINTS Tab
+					,INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE Col
+			WHERE Col.Constraint_Name = Tab.Constraint_Name
+			AND Col.Table_Name = tab.Table_Name
+			AND Constraint_Type = 'PRIMARY KEY'
+			GROUP BY tab.TABLE_NAME) T2
+WHERE T1.TABLE_NAME = T2.TABLE_NAME
+AND T1.cols = T2.keys
+AND T2.keys = 2)
+AND name <> 'sysdiagrams'
+AND name <> '__RefactorLog'";
+
+	con.Open();
+	DataTable dt = new DataTable();
+	using (SqlDataAdapter da = new SqlDataAdapter(SQL, con))
+    {
+		da.Fill(dt);
+    }
+	con.Close();
+
+	foreach(DataRow row in dt.Rows)
+    { 
+		string tableName = row["name"].ToString(); 
+		string destFile = string.Format("{0}Repo.cs", tableName.Trim());
+		manager.StartNewFile(destFile);#>
+
+using Pocos;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+
+namespace Repos.GenericRepos
+{
+
+
+	public partial class <#= tableName.Trim() #>Repo: RepositoryBase<<#= tableName.Trim() #>>
+	{
+		public <#= tableName.Trim() #>Repo(InsuranceDbContext context) : base(context) 
+			{ }
+	}
+}
+
+<# } #>
+//}
+
+<# manager.Process(); #>
