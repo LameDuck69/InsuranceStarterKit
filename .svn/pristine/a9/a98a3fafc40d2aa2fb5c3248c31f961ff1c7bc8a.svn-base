@@ -1,0 +1,15 @@
+﻿using NUnit.Framework;
+using System;
+
+namespace DalTests
+{
+    [TestFixture]
+    public class UnitTest1
+    {
+        [Test]
+        public void AddACountry()
+        {
+            CountryUnitOfWork ouw = new CountryUnitOfWork();
+        }
+    }
+}

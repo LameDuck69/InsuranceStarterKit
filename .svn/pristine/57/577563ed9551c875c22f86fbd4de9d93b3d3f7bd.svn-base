@@ -1,0 +1,22 @@
+﻿using OsipDal.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OsipDal.UnitsOfWork
+{
+    public interface IUnitOfWork<T, R> 
+        where T : class  
+        where R :IRepository<T>
+    {
+        R repo { get; set; }
+
+        List<T> GetAll();
+        void Update(T entity);
+        void Delete( T entity);        
+        void Commit();
+    }
+}

@@ -1,0 +1,66 @@
+﻿using OsipDal.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OsipDal.UnitsOfWork
+{
+    public class UnitOfWorkBase<T, R> : IUnitOfWork<T, R> 
+        where T : class 
+        where R : IRepository<T>
+    {
+        public DbContext context { get; set; }
+
+        public R repo { get; set; }
+
+        public UnitOfWorkBase(R Repository)
+        {
+            repo = Repository;
+        }
+
+        public List<T> GetAll()
+        {
+            return (System.Collections.Generic.List<T>)repo.GetAll();
+        }
+
+        public void Update(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Commit()
+        {
+            context.SaveChanges();
+        }
+
+        #region IDisposable
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (context != null)
+                {
+                    context.Dispose();
+                }
+            }
+        }
+
+        #endregion
+    }
+}

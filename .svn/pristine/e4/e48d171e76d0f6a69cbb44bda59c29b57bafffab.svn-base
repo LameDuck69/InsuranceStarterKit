@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OsipDal.EF;
+using OsipDal.Repositories;
+
+namespace OsipDal.UnitsOfWork
+{
+    class CountryUow<Country>  , UnitOfWorkBase<Country> , IUnitOfWork<Country>
+    {
+        public IRepository<T> repo
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public void Delete(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<T> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(T entity)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
